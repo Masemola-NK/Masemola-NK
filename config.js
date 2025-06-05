@@ -1,2 +1,2 @@
 console.log('Hello world')
-console.log("Version 1 Datastrctures")
+console.log("Version 2 Datastrctures")
