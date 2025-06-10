@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sudoku Solver</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+
+    :root {
+      --border-radius: 0.75rem;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --font-family: 'Inter', sans-serif;
+      --gray-text: #6b7280;
+      --input-bg: #f9fafb;
+      --input-focus-border: #111827;
+      --button-bg: #111827;
+      --button-hover-bg: #374151;
+      --button-color: #fff;
+      --cell-border: #d1d5db;
+      --cell-bg: white;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background: #ffffff;
+      color: var(--gray-text);
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      color: #111827;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+
+    p.subtext {
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      color: var(--gray-text);
+    }
+
+    #sudoku-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: repeat(9, 1fr);
+      gap: 2px;
+      background: #374151;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      user-select: none;
+      margin-bottom: 2rem;
+    }
+
+    .cell {
+      background: var(--cell-bg);
+      border: 1px solid var(--cell-border);
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: 0;
+      position: relative;
+      user-select: text;
+    }
+
+    .cell input {
+      /*-webkit-appearance: none;
+      -moz-appearance: textfield;*/
+      border: none;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.25rem;
+      font-family: var(--font-family);
+      color: #111827;
+      background: var(--input-bg);
+      border-radius: 0;
+      caret-color: var(--button-bg);
+      outline-offset: 2px;
+      outline-color: transparent;
+      transition: outline-color 0.25s ease;
+      line-height: 1.5;
+    }
+
+    .cell input::-webkit-inner-spin-button,
+    .cell input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .cell input:focus {
+      outline-color: var(--input-focus-border);
+    }
+
+    /* Thicker borders for 3x3 subgrid separation */
+    .cell:nth-child(3n) {
+      border-right-width: 3px;
+    }
+    .cell:nth-child(n+19):nth-child(-n+27),
+    .cell:nth-child(n+46):nth-child(-n+54) {
+      border-bottom-width: 3px;
+    }
+    /* Left border thicker on 0, 3, 6 columns - do on rows with offset */
+    @media (min-width: 0) {
+      .cell:nth-child(9n+1) {
+        border-left-width: 3px;
+      }
+      /* Top border for first row */
+      .cell:nth-child(-n+9) {
+        border-top-width: 3px;
+      }
+    }
+
+    button {
+      background-color: var(--button-bg);
+      color: var(--button-color);
+      border: none;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      font-size: 1.125rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    button:hover,
+    button:focus {
+      background-color: var(--button-hover-bg);
+      outline: none;
+    }
+
+    #message {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #dc2626; /* red-600 */
+      min-height: 1.5em;
+      user-select: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Sudoku Solver Application">
+    <h1>Sudoku Solver</h1>
+    <p class="subtext">Enter numbers (1-9) in the grid below and click "Solve" to solve the puzzle.</p>
+    <div id="sudoku-grid" aria-label="Sudoku input grid" role="grid" aria-readonly="false"></div>
+    <button id="solve-btn" aria-label="Solve Sudoku puzzle">Solve</button>
+    <div id="message" role="alert" aria-live="polite"></div>
+  </main>
+
+  <script>
+    // Create 9x9 input grid
+    const gridContainer = document.getElementById('sudoku-grid');
+    const cells = [];
+
+    for (let i = 0; i < 81; i++) {
+      const cellDiv = document.createElement('div');
+      cellDiv.className = 'cell';
+      cellDiv.setAttribute('role', 'gridcell');
+
+      const input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('inputmode', 'numeric');
+      input.setAttribute('maxlength', '1');
+      input.setAttribute('aria-label', `Row ${Math.floor(i / 9) + 1} column ${(i % 9) + 1}`);
+      input.addEventListener('input', (e) => {
+        let val = e.target.value;
+        if (!/^[1-9]$/.test(val)) {
+          e.target.value = '';
+        }
+      });
+
+      cellDiv.appendChild(input);
+      gridContainer.appendChild(cellDiv);
+      cells.push(input);
+    }
+
+    // Helper functions to access board representation
+    function getBoard() {
+      const board = [];
+      for (let r = 0; r < 9; r++) {
+        const row = [];
+        for (let c = 0; c < 9; c++) {
+          const val = cells[r * 9 + c].value;
+          row.push(val === '' ? 0 : Number(val));
+        }
+        board.push(row);
+      }
+      return board;
+    }
+
+    function setBoard(board) {
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          cells[r * 9 + c].value = board[r][c] === 0 ? '' : String(board[r][c]);
+        }
+      }
+    }
+
+    function isValid(board, row, col, num) {
+      for (let x = 0; x < 9; x++) {
+        if (board[row][x] === num) return false;
+        if (board[x][col] === num) return false;
+      }
+      const startRow = Math.floor(row / 3) * 3;
+      const startCol = Math.floor(col / 3) * 3;
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          if (board[startRow + i][startCol + j] === num) return false;
+        }
+      }
+      return true;
+    }
+
+    function findEmptyLocation(board) {
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          if (board[r][c] === 0) return [r, c];
+        }
+      }
+      return null;
+    }
+
+    function solveSudoku(board) {
+      const emptyLoc = findEmptyLocation(board);
+      if (!emptyLoc) return true; // Solved
+      const [row, col] = emptyLoc;
+
+      for (let num = 1; num <= 9; num++) {
+        if (isValid(board, row, col, num)) {
+          board[row][col] = num;
+          if (solveSudoku(board)) return true;
+          board[row][col] = 0; // Backtrack
+        }
+      }
+      return false;
+    }
+
+    const messageElem = document.getElementById('message');
+    document.getElementById('solve-btn').addEventListener('click', () => {
+      messageElem.textContent = '';
+      const board = getBoard();
+
+      if (board.flat().every(n => n === 0)) {
+        messageElem.textContent = 'Please enter some numbers to solve.';
+        return;
+      }
+
+      if (solveSudoku(board)) {
+        setBoard(board);
+        messageElem.style.color = '#168039'; // green-600
+        messageElem.textContent = 'Puzzle solved!';
+      } else {
+        messageElem.style.color = '#dc2626'; // red-600
+        messageElem.textContent = 'No solution exists for the given puzzle.';
+      }
+    });
+  </script>
+</body>
+</html>
+
