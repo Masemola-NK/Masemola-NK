@@ -23,9 +23,15 @@ on new and upcoming secrure development and data engineer trends within Discord,
 ---
 ## Projects
 
--Project_1
--Project_2
--Project_3
+###**Project_1 => [React Admin Dashboard](https://github.com/Masemola-NK/reactJS/tree/master)**
+      -  React Admin Dashboard built with React.js for scalable web applications that retains principles such as reusable components,
+            smooth navigation throurgh out various files for differnt displays from [charts.js](https://www.chartjs.org/docs/latest/samples/information.html), 
+                  with it's sleek User Interface components.
+---
+###**Project_2 ** 
+
+----
+###***Project_3 **
 
 
 🚀 Exploring **AI,serverless computing, data-driven applications, scalable distributed systems, data engineering best practices**. 
