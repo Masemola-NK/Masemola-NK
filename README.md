@@ -1,10 +1,15 @@
 # Hey there, I'm Neo_Kgomomtso 👨‍💻
 🖥️ Software Developer | 📊 Data Engineer 
 
+---
+
 Passionate about **clean code, performance optimization** which has allowed me to continusly improve my know how.  
 A background in **data engineering, web development and software development**, I aim to bridge the gap between **application design and data infrastructure**. 
 I design and optimize **data pipelines, ETL workflows, and real-time streaming systems**. Skilled in **C#, SQL, React...* Still pushing to further and progress,
 on new and upcoming secrure development and data engineer trends within Discord, StackOverFlow and Linkedin comunities.
+
+---
+## Background Summary
 
 
 - 💻 Skilled in **C#, Javascript, React, Node.js, and SQL**  
@@ -15,6 +20,12 @@ on new and upcoming secrure development and data engineer trends within Discord,
 - 🔗 Passionate about **API design, , and real-time analytics**  
 - 📈 Writing about **web performance, software architecture, and data analysis and engineerin to derive meaning**  
 
+---
+## Projects
+
+-Project_1
+-Project_2
+-Project_3
 
 
 🚀 Exploring **AI,serverless computing, data-driven applications, scalable distributed systems, data engineering best practices**. 
