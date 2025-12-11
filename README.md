@@ -1,5 +1,5 @@
-# Hey there, I'm Neo_Kgomomtso 👨‍💻
-🖥️ Software Developer | 📊 Data Engineer 
+# Hello hi, I'm Neo_Kgomomtso 👨‍💻
+## 🖥️ Software Developer | 📊 Data Engineer 
 
 ---
 
