@@ -18,7 +18,7 @@ on new and upcoming secrure development and data engineer trends within Discord,
 - 🎨 Building **responsive, mobile-first WordPress algorithim**
 - 🔌 Developing **custom plugins** for e-commerce, analytics, and process automation.
 - 🔗 Passionate about **API design, , and real-time analytics**  
-- 📈 Writing about **web performance, software architecture, and data analysis and engineerin to derive meaning**  
+- 📈 Writing about **web performance, software architecture, and data analysis and engineering to derive meaning**  
 
 ---
 ## Projects
