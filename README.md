@@ -1,4 +1,4 @@
-# Hello hi, I'm Neo_Kgomomtso 👨‍💻
+# Hello hi, I'm Neo_Kgomotso 👨‍💻
 ## 🖥️ Software Developer | 📊 Data Engineer 
 
 ---
