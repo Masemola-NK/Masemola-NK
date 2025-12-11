@@ -23,16 +23,16 @@ on new and upcoming secrure development and data engineer trends within Discord,
 ---
 ## Projects
 
-### ** Project_1 => [React Admin Dashboard](https://github.com/Masemola-NK/reactJS/tree/master) **
+### Project_1 => [React Admin Dashboard](https://github.com/Masemola-NK/reactJS/tree/master)
   - React Admin Dashboard built with React.js for scalable web applications that retains principles such as reusable components,
         smooth navigation throurgh out various files for differnt displays from [charts.js](https://www.chartjs.org/docs/latest/samples/information.html),
            with it's sleek User Interface components.
 
     ----
-### ** Project_2 **
+###  Project_2 
 ---
 
-### **Project_3 => [Store procedure C# app]() ** 
+### Project_3 => [Store procedure C# app]()  
   - CRUD in C# is the backbone of data management. Whether you’re building a desktop app, web app, or API, mastering CRUD ensures you can handle data effectively and securely.
        Entity Framework handling the ORM layer, SQL Server Management Studio managing the database, and Visual Studio powering development, CRUD in C# becomes streamlined, efficient, and developer-friendly
 
