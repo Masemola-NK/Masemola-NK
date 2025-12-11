@@ -32,7 +32,7 @@ on new and upcoming secrure development and data engineer trends within Discord,
 ###  Project_2 
 ---
 
-### Project_3 => [Store procedure C# app]()  
+### Project_3 => [Store procedure C# app](https://github.com/Masemola-NK/Csharp/tree/main/CRUD%26SQL)  
   - CRUD in C# is the backbone of data management. Whether you’re building a desktop app, web app, or API, mastering CRUD ensures you can handle data effectively and securely.
        Entity Framework handling the ORM layer, SQL Server Management Studio managing the database, and Visual Studio powering development, CRUD in C# becomes streamlined, efficient, and developer-friendly
 
